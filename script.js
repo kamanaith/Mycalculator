@@ -9,9 +9,10 @@ function appendNumber(number) {
     currentInput += number;
     updateDisplay();
 }
-function appendOperator(operator) {
+function appendOperator(op) {
     if(currentInput === '') return;
     if(previousInput !== '') calculate();
+    operator = op;
     previousInput = currentInput;
     currentInput = '';
     updateDisplay();
@@ -24,9 +25,10 @@ function clearDisplay() {
     currentInput = '';
     previousInput = '';
     operator = '';
+    updateDisplay();
 }
 function deleteDigit() {
-    currentInput = currentInput.slice(0,-1);
+    currentInput = currentInput.slice(0, -1);
     updateDisplay();
 }
 function calculate() {
@@ -37,22 +39,25 @@ function calculate() {
     switch(operator)
     {
         case '+':
-            currentInput = prev + cur ;
+            currentInput = (prev + cur) ;
             break;
         case '-':
-            currentInput = prev - cur ;
+            currentInput = (prev - cur) ;
             break;
         case '*':
-            currentInput = prev * cur ;
+            currentInput = (prev * cur) ;
             break;
         case '/':
-            currentInput = cur === 0 ? 'error' : prev/cur;           
+            currentInput = cur === 0 ? 'error' : (prev / cur);           
             break;
         case '%':
-            currentInput = prev % cur;    
+            currentInput = (prev % cur);    
             break;
         default:
             return;    
     }
-
+    currentInput = currentInput.toString();
+    previousInput = '';
+    operator = '';
+    updateDisplay();
 }
