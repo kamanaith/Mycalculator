@@ -18,12 +18,11 @@ body{
     text-align: center;
     padding: 5px;
 }
-.display{
+#display{
     padding: 20px;
     background-color: gainsboro;
     border-radius: 5%;
     margin: 2px;
-
 }
 .buttons{
     display: grid;

@@ -35,7 +35,7 @@ function calculate() {
     if(currentInput === '' || previousInput === '') return;
     const prev = parseFloat(previousInput);
     const cur = parseFloat(currentInput);
-
+{
     switch(operator)
     {
         case '+':
@@ -56,6 +56,7 @@ function calculate() {
         default:
             return;    
     }
+}
     currentInput = currentInput.toString();
     previousInput = '';
     operator = '';
