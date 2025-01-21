@@ -1,64 +1,109 @@
-let currentInput = '';
+// let currentInput = document.querySelector(".currentInput");
+// let currentInput = 0;
 
-let previousInput = '';
+// let previousInput = document.querySelector(".previousInput");
+// let previousInput = 0;
 
-let operator = '';
+let display = document.querySelector(".display");
 
-function appendNumber(number) {
-    if (number === '.' && currentInput.includes('.')) return;
-    currentInput += number;
-    updateDisplay();
+let result = "";
+
+// console.log(previousInput);
+let number = "";
+let operator;
+let entries = [];
+
+function reset() {
+  number = "";
+  operator = "";
+  entries = [];
 }
-function appendOperator(op) {
-    if(currentInput === '') return;
-    if(previousInput !== '') calculate();
-    operator = op;
-    previousInput = currentInput;
-    currentInput = '';
-    updateDisplay();
+
+function appendNumber(num) { 
+
+ if (number.length > 0) {
+  number +=num;
+ } else {
+  number = num;
+ }
+  console.log("number entered");
+ 
+  display.textContent += number;
+
 }
-function updateDisplay() {
-    const display = document.getElementsByClassName('display');
-    display.innerText = currentInput || previousInput || '0';   
+
+function appendOperator(op) { 
+
+  console.log("operator entered");
+  operator = op;
+  display.textContent += operator;
+  number = Number(number);
+
+  entries.push(number);
+ number = "";
 }
-function clearDisplay() {
-    currentInput = '';
-    previousInput = '';
-    operator = '';
-    updateDisplay();
+
+function clearButton() {
+  console.log("clear all");
+  display.textContent = reset();
+  return;
 }
-function deleteDigit() {
-    currentInput = currentInput.slice(0, -1);
-    updateDisplay();
+
+function deleteButton() {
+  console.log("back");
+display.textContent = display.textContent.substring(0,display.textContent.length-1);
+if (display.textContent.length = 0) {
+  display.textContent = reset();
+}
+
+  return;
 }
 function calculate() {
-    if(currentInput === '' || previousInput === '') return;
-    const prev = parseFloat(previousInput);
-    const cur = parseFloat(currentInput);
-{
-    switch(operator)
-    {
-        case '+':
-            currentInput = (prev + cur) ;
-            break;
-        case '-':
-            currentInput = (prev - cur) ;
-            break;
-        case '*':
-            currentInput = (prev * cur) ;
-            break;
-        case '/':
-            currentInput = cur === 0 ? 'error' : (prev / cur);           
-            break;
-        case '%':
-            currentInput = (prev % cur);    
-            break;
-        default:
-            return;    
-    }
-}
-    currentInput = currentInput.toString();
-    previousInput = '';
-    operator = '';
-    updateDisplay();
+
+  console.log(number);
+  
+  number = Number(number);
+  
+  entries.push(number);
+  console.log(entries);
+  number = "";
+  switch (operator) {
+    case "+":
+      result = entries[0] + entries[1];
+      break;
+    case "-":
+      result = entries[0] - entries[1];
+      break;
+    case "/":
+      if (entries[1] === 0) {
+        alert(console.log("cannot be divisible by zero"));
+      } else {
+        result = entries[0] / entries[1];
+      }
+      break;
+    case "*":
+      result = entries[0] * entries[1];
+      break;
+    case "%":
+      result = entries[0] % entries[1];
+      break;
+    default:
+      result = "invalid";
+      break;
+  }
+  display.textContent = result;
+  entries = [];
+  number = "";
+  console.log(entries);
+  // console.log(typeof( number));
+  number += result;
+  // result.textContent += number;
+  console.log(number);
+  // entries.push(number);
+  // result = String(result)
+  // result.textContent = number;
+  // entries.push(number);
+  // console.log(typeof(number));
+  
+  // entries.push(number);
 }
