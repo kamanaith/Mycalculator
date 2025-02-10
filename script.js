@@ -8,10 +8,15 @@ let number;
 let operator;
 
 function reset(){
+  entries = [];
+  a = " ";
+  number;
+  operator;
   display.textContent = "";
 }
 
 function clearButton() {
+  
   console.log("clear all");
   display.textContent = reset();
   console.log("cleared");
@@ -29,15 +34,15 @@ function deleteButton() {
   }
   return;
 }
+let a =" ";
 
   function clicked(e) { 
   if ( num.includes(e)) {
     console.log("number clicked");
-  
      number = String(e);
-     number.concat(number);
-  console.log(typeof(number));
-  console.log("number=",number);
+     a += number;
+  console.log(typeof(a));
+  console.log("number=",a);
   
     display.textContent += number;
     // entries.push(number);
@@ -45,11 +50,10 @@ function deleteButton() {
     
     
   } else if (oper.includes(e)) {
-    
-    number = Number(number);
+    number = Number(a);
     console.log(typeof(number));
     entries.push(number);
-    
+    a = " ";
     let op;
     console.log("operator clicked");
     operator = op;
@@ -63,12 +67,10 @@ function deleteButton() {
   }
   }
 function calculate() {
-  number = Number(number);
+  number = Number(a);
   console.log(typeof(number));
   entries.push(number);
-  // entries.push(number);
-  // console.log(entries);
-  // number = "";
+  a = " ";
   switch (entries[1]) {
     case "+":
       result = entries[0] + entries[2] ;
